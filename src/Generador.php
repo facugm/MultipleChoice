@@ -6,12 +6,19 @@ use Symfony\Component\Yaml\Yaml;
 
 class Generador {
 
-    protected $preguntas;
+    public $preguntas;
 
     public function __construct($file) {
-        $preguntas = Yaml::parseFile($file);
+        $archivo = Yaml::parseFile($file);
 
-        shuffle($preguntas);
+        $listaPregs = $archivo['preguntas'];
+        shuffle($listaPregs);
+
+        for($i = 0; $i < 10; $i++){
+            $this->preguntas[$i] = new Pregunta($listaPregs[$i], $i+1);
+        }
+        
+
     }
 
     public function verPreguntas() {
