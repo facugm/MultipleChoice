@@ -8,6 +8,7 @@ class Pregunta {
 
     protected $numero;
     protected $descripcion;
+    protected $respuestas;
     protected $respCorrectas;
     protected $respIncorrectas;
     protected $opcionTodas = false;
@@ -42,6 +43,36 @@ class Pregunta {
             $this->ningunaText = $array["texto_ninguna_de_las_anteriores"];
         }
         
+        $this->todasLasResp();
+    }
+
+    protected function todasLasResp(){
+        $this->respuestas = array_merge($this->respCorrectas, $this->respIncorrectas);
+        shuffle($this->respuestas);
+    }
+
+    public function obtenerRespuestas(){
+        return $this->respuestas;
+    }
+
+    public function obtenerRespCorrectas(){
+        return $this->respCorrectas;
+    }
+
+    public function obtenerRespIncorrectas(){
+        return $this->respIncorrectas;
+    }
+
+    public function obtenerDescripcion(){
+        return $this->descripcion;
+    }
+
+    public function obtenerNumero(){
+        return $this->numero;
+    }
+
+    public function obtenerCantResp(){
+        return count($this->respuestas);
     }
 
 }
